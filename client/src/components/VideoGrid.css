@@ -1,0 +1,14 @@
+.banner_component {
+    height: 25vh;
+    background-color:cadetblue;
+}
+
+.channel_description p {
+    margin-bottom: 0;
+    font-size: 11px;
+}
+
+.channel_logo img{
+    width: 50;
+    height: 50px;
+}

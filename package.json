@@ -1,0 +1,25 @@
+{
+  "name": "nxtwatch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "react-scripts test",
+    "start:frontend": "cd client && npm start",
+    "start:backend": "nodemon server/server.js",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "build": "cd client && npm install && npm run build && react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.1",
+    "nodemon": "^3.1.0"
+  }
+}
