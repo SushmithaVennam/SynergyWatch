@@ -7,10 +7,12 @@ import Cookies from "js-cookie";
 import "./Navbar.css";
 import "remixicon/fonts/remixicon.css";
 import { useState } from "react";
+import black_theme_logo from "../resources/PFXWatchWhite.png";
+import light_theme_logo from "../resources/PFXWatchBlack.png";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function BasicExample(props) {
+function MyNavbar(props) {
   const LogoutHandler = () => {
     Cookies.remove("jwt_token");
     window.location.href = "/login";
@@ -20,14 +22,14 @@ function BasicExample(props) {
     <Navbar expand="lg" className={props.props.BGcolor}>
       <Container>
         <Navbar.Brand>
-          <span className="span-class">SYNERGY</span>
-          <span
-            className={
-              props.props.BGcolor !== "bg-black" ? "text-dark" : "text-light"
+          <img
+            src={
+              props.props.BGcolor !== "bg-black"
+                ? light_theme_logo
+                : black_theme_logo
             }
-          >
-            WATCH
-          </span>
+            width={"100px"}
+          ></img>
         </Navbar.Brand>
         <div className="icons">
           <div>
@@ -59,4 +61,4 @@ function BasicExample(props) {
   );
 }
 
-export default BasicExample;
+export default MyNavbar;

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import BasicExample from "./Navbar";
+import MyNavbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Button from "react-bootstrap/Button";
 import "remixicon/fonts/remixicon.css";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import "./VideoGrid.css";
+import black_theme_logo from "../resources/PFXWatchWhite.png";
+import light_theme_logo from "../resources/PFXWatchBlack.png";
 
 const Home = () => {
   const port = 4444;
@@ -16,11 +18,7 @@ const Home = () => {
   const [bgcolor, setBGColor] = useState("bg-white");
 
   const ChangeMode = () => {
-    if (bgcolor === "bg-white") {
-      setBGColor("bg-black");
-    } else {
-      setBGColor("bg-white");
-    }
+    setBGColor(bgcolor === "bg-white" ? "bg-black" : "bg-white");
   };
 
   useEffect(() => {
@@ -73,7 +71,7 @@ const Home = () => {
   return (
     <div>
       <section className="nav_bar_component">
-        <BasicExample props={{ BGcolor: bgcolor, changeMode: ChangeMode }} />
+        <MyNavbar props={{ BGcolor: bgcolor, changeMode: ChangeMode }} />
       </section>
 
       <section className={`container-fluid ${bgcolor}`}>
@@ -82,9 +80,19 @@ const Home = () => {
             <Sidebar props={{ BGcolor: bgcolor }} />
           </div>
           <div className={`col-md-9 container ${bgcolor}`}>
-            <section className="banner_component ps-3">
-              <h3>Synergy Watch</h3>
-              <p>Buy Synergy watch Premium prepaid plans with UPI</p>
+            <section className=" ps-3">
+              <img
+                src={
+                  bgcolor !== "bg-black" ? light_theme_logo : black_theme_logo
+                }
+                width={"100px"}
+              ></img>
+              <p data-bs-theme="light">
+                Buy Synergy watch Premium prepaid plans with UPI
+              </p>
+              <p data-bs-theme="dark">
+                Buy Synergy watch Premium prepaid plans with UPI
+              </p>
               <Button variant="light" size="sm">
                 GET IT NOW
               </Button>
