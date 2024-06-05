@@ -23,9 +23,7 @@ function MyNavbar(props) {
         <Navbar.Brand>
           <img
             src={
-              props.props.CurrentTheme !== "dark"
-                ? light_theme_logo
-                : black_theme_logo
+              props.props.Theme !== "dark" ? light_theme_logo : black_theme_logo
             }
             width={"100px"}
           ></img>

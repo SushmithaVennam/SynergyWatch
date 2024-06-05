@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Container } from "react-bootstrap";
-import BasicExample from "./Navbar";
+import MyNavbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Cookies from "js-cookie";
 import "./Video_playback.css";
@@ -15,6 +15,13 @@ function Video_playback() {
   const [savebutton, setSaveButton] = useState("ri-save-line");
   const [dislikebutton, setDisLikeButton] = useState("ri-thumb-down-line");
   const [likebutton, setLikeButton] = useState("ri-thumb-up-line");
+  const [theme, setTheme] = useState("light");
+
+  const ToggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+    console.log("theme toggled");
+  };
+
   const jwtToken = Cookies.get("jwt_token");
   if (jwtToken === undefined) {
     Cookies.remove("jwt_token");
@@ -153,15 +160,20 @@ function Video_playback() {
 
   if (curStatus === "Loaded") {
     return (
-      <div>
+      <div className={theme}>
         <section className="nav_bar_component">
-          <BasicExample />
+          <MyNavbar
+            props={{
+              toggleTheme: ToggleTheme,
+              Theme: theme,
+            }}
+          />
         </section>
 
         <section className="container-fluid">
           <div className="row">
             <div className="col-md-3">
-              <Sidebar />
+              <Sidebar props={{ srcpage: "Playback" }} />
             </div>
 
             <div className="col-md-9 container">
