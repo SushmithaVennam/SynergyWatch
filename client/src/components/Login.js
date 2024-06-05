@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-// import { NavbarBrand } from "react-bootstrap";
+import light_theme_logo from "../resources/PFXWatchBlack.png";
 
 export const Login = (props) => {
   // const [cookies, setCookie, removeCookie] = useCookies(["myCookie"]);
@@ -67,10 +67,7 @@ export const Login = (props) => {
         // className=" m-4"
         style={{ padding: "20px" }}
       >
-        <div className="text-center">
-          <span className="span-class">SYNERGY</span>
-          <span className="span-class1">WATCH</span>
-        </div>
+        <img src={light_theme_logo} width={"100px"}></img>
         <Form.Group
           as={Row}
           className="mb-3 mt-3 form-control-sm"

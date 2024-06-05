@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import BasicExample from "./Navbar";
+import MyNavbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import "remixicon/fonts/remixicon.css";
 import Cookies from "js-cookie";
@@ -9,14 +9,11 @@ const Gaming = () => {
   const port = 4444;
   const [videosArray, setVideosArray] = useState([]);
   const [loading, setLoading] = useState("Loading");
-  const [bgcolor, setBGColor] = useState("bg-white");
+  const [theme, setTheme] = useState("light");
 
-  const ChangeMode = () => {
-    if (bgcolor === "bg-white") {
-      setBGColor("bg-black");
-    } else {
-      setBGColor("bg-white");
-    }
+  const ToggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+    console.log("theme toggled");
   };
 
   useEffect(() => {
@@ -67,22 +64,26 @@ const Gaming = () => {
   return (
     <div>
       <section className="nav_bar_component">
-        <BasicExample props={{ BGcolor: bgcolor, changeMode: ChangeMode }} />
+        <MyNavbar
+          props={{
+            toggleTheme: ToggleTheme,
+            Theme: theme,
+          }}
+        />
       </section>
-
-      <section className="container-fluid">
+      <section className={`container-fluid ${theme}`}>
         <div className="row">
-          <div className={`col-md-3 ${bgcolor}`}>
-            <Sidebar props={{ BGcolor: bgcolor }} />
+          <div className="col-md-3">
+            <Sidebar props={{ Theme: theme }} />
           </div>
-          <div className={`col-md-9 container ${bgcolor}`}>
+          <div className={`col-md-9 container ${theme}`}>
             <section className="input_group_search container my-5">
               <div className="input-group mb-3">
                 <input
                   type="text"
                   className="form-control input-sm"
                   placeholder="Search"
-                  aria-label="Recipient's username"
+                  aria-label="Search"
                   aria-describedby="basic-addon2"
                 />
                 <div className="input-group-append">
@@ -100,13 +101,11 @@ const Gaming = () => {
                     {videosArray.map((video_json, index) => (
                       <div className="col-md-4 my-3">
                         <div className="thumbnail_image" key={index}>
-                          <Link
-                            to={"/videos/" + video_json._id}
-                            // target="_blank"
-                          >
+                          <Link to={"/videos/" + video_json._id}>
                             <img
                               src={video_json.video_thumbnail_url}
                               alt="Video thumbnail"
+                              className="img-fluid"
                             />
                           </Link>
                         </div>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import MyNavbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Button from "react-bootstrap/Button";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from "react-bootstrap/Form";
 import "remixicon/fonts/remixicon.css";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
@@ -14,11 +16,11 @@ const Home = () => {
   const [videosArray, setVideosArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchString, setSearchString] = useState("");
+  const [theme, setTheme] = useState("light");
 
-  const [bgcolor, setBGColor] = useState("bg-white");
-
-  const ChangeMode = () => {
-    setBGColor(bgcolor === "bg-white" ? "bg-black" : "bg-white");
+  const ToggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+    console.log("theme toggled");
   };
 
   useEffect(() => {
@@ -71,57 +73,53 @@ const Home = () => {
   return (
     <div>
       <section className="nav_bar_component">
-        <MyNavbar props={{ BGcolor: bgcolor, changeMode: ChangeMode }} />
+        <MyNavbar
+          props={{
+            toggleTheme: ToggleTheme,
+            Theme: theme,
+          }}
+        />
       </section>
 
-      <section className={`container-fluid ${bgcolor}`}>
+      <section className={`container-fluid ${theme}`}>
         <div className="row">
           <div className="col-md-3">
-            <Sidebar props={{ BGcolor: bgcolor }} />
+            <Sidebar props={{ Theme: theme }} />
           </div>
-          <div className={`col-md-9 container ${bgcolor}`}>
-            <section className=" ps-3">
+          <div className={`col-md-9 container ${theme}`}>
+            <section>
               <img
-                src={
-                  bgcolor !== "bg-black" ? light_theme_logo : black_theme_logo
-                }
+                src={theme !== "dark" ? light_theme_logo : black_theme_logo}
                 width={"100px"}
               ></img>
-              <p data-bs-theme="light">
-                Buy Synergy watch Premium prepaid plans with UPI
-              </p>
-              <p data-bs-theme="dark">
-                Buy Synergy watch Premium prepaid plans with UPI
-              </p>
-              <Button variant="light" size="sm">
+              <p>Buy PFX watch Premium prepaid plans with UPI</p>
+
+              <Button
+                variant={`outline-${theme === "light" ? "dark" : "light"}`}
+                size="sm"
+                className={theme}
+              >
                 GET IT NOW
               </Button>
             </section>
-            <section className="input_group_search container my-5">
-              <div className="input-group mb-3">
-                <input
-                  type="text"
-                  className="form-control input-sm"
-                  placeholder="Search"
-                  aria-label="Recipient's username"
-                  aria-describedby="basic-addon2"
-                  onChange={(event) => {
-                    setSearchString(event.target.value);
-                    console.log("search string is set to " + searchString);
-                  }}
-                />
-                <Button
-                  variant="light"
-                  size="sm"
-                  className="input-group-append ri-search-line"
-                  onClick={() => {
-                    console.log("Search button clicked");
-                    setLoading(true);
-                    fetchVideos();
-                  }}
-                ></Button>
-              </div>
-            </section>
+
+            <InputGroup className={`mb-3 mt-3 ${theme}`}>
+              <Form.Control
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="basic-addon2"
+              />
+              <Button
+                variant={`outline-${theme == "light" ? "dark" : "light"}`}
+                // variant={`outline-secondary`}
+                size="sm"
+                className="input-group-append ri-search-line"
+                onClick={() => {
+                  setLoading(true);
+                  fetchVideos();
+                }}
+              ></Button>
+            </InputGroup>
 
             <div className="thumbnail_container border">
               <section className="thumbnails_layout">
@@ -129,14 +127,12 @@ const Home = () => {
                   <div className="row">
                     {videosArray.map((video_json, index) => (
                       <div className="col-md-4 my-3">
-                        <div className="thumbnail_image p-10" key={index}>
-                          <Link
-                            to={"/videos/" + video_json._id}
-                            // target="_blank"
-                          >
+                        <div className="thumbnail_image" key={index}>
+                          <Link to={"/videos/" + video_json._id}>
                             <img
                               src={video_json.video_thumbnail_url}
                               alt="Video thumbnail"
+                              className="img-fluid"
                             />
                           </Link>
                         </div>

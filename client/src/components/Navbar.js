@@ -6,7 +6,6 @@ import Button from "react-bootstrap/Button";
 import Cookies from "js-cookie";
 import "./Navbar.css";
 import "remixicon/fonts/remixicon.css";
-import { useState } from "react";
 import black_theme_logo from "../resources/PFXWatchWhite.png";
 import light_theme_logo from "../resources/PFXWatchBlack.png";
 
@@ -17,14 +16,14 @@ function MyNavbar(props) {
     Cookies.remove("jwt_token");
     window.location.href = "/login";
   };
-  console.log(props.props.BGcolor);
+
   return (
-    <Navbar expand="lg" className={props.props.BGcolor}>
+    <Navbar expand="lg" className={props.props.Theme}>
       <Container>
         <Navbar.Brand>
           <img
             src={
-              props.props.BGcolor !== "bg-black"
+              props.props.CurrentTheme !== "dark"
                 ? light_theme_logo
                 : black_theme_logo
             }
@@ -36,13 +35,11 @@ function MyNavbar(props) {
             <Button
               variant="outline-info"
               size="sm"
-              onClick={props.props.changeMode}
+              onClick={props.props.toggleTheme}
             >
               <i
                 className={
-                  props.props.BGcolor !== "bg-black"
-                    ? "ri-moon-fill"
-                    : "ri-sun-fill"
+                  props.props.theme !== "dark" ? "ri-moon-fill" : "ri-sun-fill"
                 }
               ></i>
             </Button>

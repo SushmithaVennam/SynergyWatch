@@ -14,3 +14,12 @@
     justify-content:space-around;
     width: 180px;
 }
+
+.light {
+    background-color: #fafafa;
+    color: #1f2023;
+  }
+.dark {
+    background-color: #1f2023;
+    color: #efefef;
+  }
