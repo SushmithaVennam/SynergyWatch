@@ -9,6 +9,11 @@ import black_theme_logo from "../resources/PFXWatchWhite.png";
 import light_theme_logo from "../resources/PFXWatchBlack.png";
 
 const Mainpage = (props) => {
+  const [showPay, setshowPay] = useState(true);
+  const handleClosePay = () => {
+    setshowPay(false);
+  };
+
   return (
     <div>
       <section className="nav_bar_component">
@@ -25,27 +30,51 @@ const Mainpage = (props) => {
             <Sidebar props={{ srcpage: props.props.src }} />
           </div>
           <div className={`col-md-9 container`}>
-            <section>
-              <img
-                src={
-                  props.props.curTheme !== "dark"
-                    ? light_theme_logo
-                    : black_theme_logo
-                }
-                width={"100px"}
-              ></img>
-              <p>Buy PFX watch Premium prepaid plans with UPI</p>
+            {showPay && (
+              <section>
+                <div className="col text-right">
+                  <Button
+                    onClick={handleClosePay}
+                    variant={`outline-${
+                      props.props.curTheme === "light" ? "dark" : "light"
+                    }`}
+                    size="sm"
+                    className={`${props.props.curTheme} btn btn-primary`}
+                  >
+                    Close
+                  </Button>
+                </div>
+                <img
+                  src={
+                    props.props.curTheme !== "dark"
+                      ? light_theme_logo
+                      : black_theme_logo
+                  }
+                  width={"100px"}
+                ></img>
+                <p>Buy PFX watch Premium prepaid plans with UPI</p>
 
-              <Button
-                variant={`outline-${
-                  props.props.curTheme === "light" ? "dark" : "light"
-                }`}
-                size="sm"
-                className={props.props.curTheme}
-              >
-                GET IT NOW
-              </Button>
-            </section>
+                <Button
+                  variant={`outline-${
+                    props.props.curTheme === "light" ? "dark" : "light"
+                  }`}
+                  size="sm"
+                  className={props.props.curTheme}
+                >
+                  GET IT NOW
+                </Button>
+                <Button
+                  onClick={handleClosePay}
+                  variant={`outline-${
+                    props.props.curTheme === "light" ? "dark" : "light"
+                  }`}
+                  size="sm"
+                  className={props.props.curTheme}
+                >
+                  Close
+                </Button>
+              </section>
+            )}
 
             <InputGroup className={`mb-3 mt-3`}>
               <Form.Control

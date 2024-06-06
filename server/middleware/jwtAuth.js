@@ -14,7 +14,7 @@ const middleware = (req, res, next) => {
     req.user = verifiedUser;
     next();
   } catch (error) {
-    console.log(error.message);
+    console.log("Middle ware : " + error.message + " " + req.route.path);
     return res
       .status(401)
       .json({ error: "Invalid token, authentication failed..!" });

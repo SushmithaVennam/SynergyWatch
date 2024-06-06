@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
+import Mainpage from "./Mainpage";
 import "remixicon/fonts/remixicon.css";
 import Cookies from "js-cookie";
-import Mainpage from "./Mainpage";
 
 const Gaming = () => {
   const port = 4444;
   const [videosArray, setVideosArray] = useState([]);
   const [loading, setLoading] = useState("Loading");
+
   const [theme, setTheme] = useState("light");
 
   const ToggleTheme = () => {
@@ -53,23 +54,28 @@ const Gaming = () => {
         setLoading(false);
       } else {
         setLoading(response.message);
+        console.log("Error while fetching videos. " + response.error);
+        if (response.status == 401) {
+          Cookies.remove("jwt_token");
+          window.location.href = "/login";
+        }
       }
     } catch (error) {
       console.log("Error while fetching videos. " + error.message);
     }
   };
 
+  const props = {
+    themesetter: ToggleTheme,
+    curTheme: theme,
+    searchHandler: fetchVideos,
+    videos: videosArray,
+    src: "Gaming",
+  };
+
   return (
     <div className={theme}>
-      <Mainpage
-        props={{
-          themesetter: ToggleTheme,
-          curTheme: theme,
-          searchHandler: fetchVideos,
-          videos: videosArray,
-          src: "Gaming",
-        }}
-      />
+      <Mainpage props={props} />
     </div>
   );
 };

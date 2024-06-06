@@ -57,23 +57,29 @@ const Home = () => {
         console.log(filterdData);
         console.log("Searched for '" + searchString + "'");
         setLoading(false);
+      } else {
+        console.log("Error while fetching videos. " + response.error);
+        if (response.status == 401) {
+          Cookies.remove("jwt_token");
+          window.location.href = "/login";
+        }
       }
     } catch (error) {
       console.log("Error while fetching videos. " + error.message);
     }
   };
 
+  const props = {
+    themesetter: ToggleTheme,
+    curTheme: theme,
+    searchHandler: fetchVideos,
+    videos: videosArray,
+    src: "Home",
+  };
+
   return (
     <div className={theme}>
-      <Mainpage
-        props={{
-          themesetter: ToggleTheme,
-          curTheme: theme,
-          searchHandler: fetchVideos,
-          videos: videosArray,
-          src: "Home",
-        }}
-      />
+      <Mainpage props={props} />
     </div>
   );
 };
