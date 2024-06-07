@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MyNavbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Button from "react-bootstrap/Button";
@@ -7,12 +7,14 @@ import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import black_theme_logo from "../resources/PFXWatchWhite.png";
 import light_theme_logo from "../resources/PFXWatchBlack.png";
+import "./VideoGrid.css";
 
 const Mainpage = (props) => {
   const [showPay, setshowPay] = useState(true);
   const handleClosePay = () => {
     setshowPay(false);
   };
+  localStorage.setItem("theme", props.props.curTheme);
 
   return (
     <div>
@@ -84,7 +86,7 @@ const Mainpage = (props) => {
               />
               <Button
                 variant={`outline-${
-                  props.props.curTheme == "light" ? "dark" : "light"
+                  props.props.curTheme === "light" ? "dark" : "light"
                 }`}
                 // variant={`outline-secondary`}
                 size="sm"

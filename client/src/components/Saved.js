@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 import Mainpage from "./Mainpage";
 import "remixicon/fonts/remixicon.css";
 import Cookies from "js-cookie";
-import "./VideoGrid.css";
 
 const Saved = () => {
   const port = 4444;
   const [videosArray, setVideosArray] = useState([]);
   const [loading, setLoading] = useState("Loading");
 
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const ToggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
-    console.log("theme toggled");
   };
 
   useEffect(() => {
@@ -56,7 +54,7 @@ const Saved = () => {
       } else {
         setLoading(response.message);
         console.log("Error while fetching videos. " + response.error);
-        if (response.status == 401) {
+        if (response.status === 401) {
           Cookies.remove("jwt_token");
           window.location.href = "/login";
         }

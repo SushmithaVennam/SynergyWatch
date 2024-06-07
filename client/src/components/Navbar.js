@@ -37,7 +37,7 @@ function MyNavbar(props) {
             >
               <i
                 className={
-                  props.props.theme !== "dark" ? "ri-moon-fill" : "ri-sun-fill"
+                  props.props.Theme !== "dark" ? "ri-moon-fill" : "ri-sun-fill"
                 }
               ></i>
             </Button>

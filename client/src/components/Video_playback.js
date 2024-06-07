@@ -15,7 +15,7 @@ function Video_playback() {
   const [savebutton, setSaveButton] = useState("ri-save-line");
   const [dislikebutton, setDisLikeButton] = useState("ri-thumb-down-line");
   const [likebutton, setLikeButton] = useState("ri-thumb-up-line");
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const ToggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -158,6 +158,7 @@ function Video_playback() {
     return <p>{curStatus}</p>;
   }
 
+  localStorage.setItem("theme", theme);
   if (curStatus === "Loaded") {
     return (
       <div className={theme}>

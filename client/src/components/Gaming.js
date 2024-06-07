@@ -8,11 +8,10 @@ const Gaming = () => {
   const [videosArray, setVideosArray] = useState([]);
   const [loading, setLoading] = useState("Loading");
 
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const ToggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
-    console.log("theme toggled");
   };
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const Gaming = () => {
       } else {
         setLoading(response.message);
         console.log("Error while fetching videos. " + response.error);
-        if (response.status == 401) {
+        if (response.status === 401) {
           Cookies.remove("jwt_token");
           window.location.href = "/login";
         }
