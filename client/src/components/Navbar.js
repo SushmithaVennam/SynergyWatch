@@ -22,6 +22,7 @@ function MyNavbar(props) {
       <Container>
         <Navbar.Brand>
           <img
+            alt="Logo"
             src={
               props.props.Theme !== "dark" ? light_theme_logo : black_theme_logo
             }

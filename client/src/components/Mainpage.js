@@ -47,6 +47,7 @@ const Mainpage = (props) => {
                   </Button>
                 </div>
                 <img
+                  alt="logo"
                   src={
                     props.props.curTheme !== "dark"
                       ? light_theme_logo
