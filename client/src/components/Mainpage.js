@@ -5,8 +5,8 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
-import black_theme_logo from "../resources/PFXWatchWhite.png";
-import light_theme_logo from "../resources/PFXWatchBlack.png";
+import logo_light from "../resources/PFXWatchWhite.png";
+import logo_dark from "../resources/PFXWatchBlack.png";
 import "./VideoGrid.css";
 
 const Mainpage = (props) => {
@@ -15,7 +15,8 @@ const Mainpage = (props) => {
     setshowPay(false);
   };
   localStorage.setItem("theme", props.props.curTheme);
-
+  const video_id = "30b642bd-7591-49f4-ac30-5c538f975b15";
+  // console.log(props.props.videos);
   return (
     <div>
       <section className="nav_bar_component">
@@ -34,7 +35,10 @@ const Mainpage = (props) => {
           <div className={`col-md-9 container`}>
             {showPay && (
               <section>
-                <div className="col text-right">
+                <div
+                  style={{ backgroundImage: "url(" }}
+                  className="col text-right"
+                >
                   <Button
                     onClick={handleClosePay}
                     variant={`outline-${
@@ -48,11 +52,7 @@ const Mainpage = (props) => {
                 </div>
                 <img
                   alt="logo"
-                  src={
-                    props.props.curTheme !== "dark"
-                      ? light_theme_logo
-                      : black_theme_logo
-                  }
+                  src={props.props.curTheme !== "dark" ? logo_light : logo_dark}
                   width={"100px"}
                 ></img>
                 <p>Buy PFX watch Premium prepaid plans with UPI</p>
@@ -102,32 +102,37 @@ const Mainpage = (props) => {
                   <div className="row">
                     {props.props.videos.map((video_json, index) => (
                       <div className="col-md-4 my-3">
-                        <div className="thumbnail_image" key={index}>
-                          <Link to={"/videos/" + video_json._id}>
+                        <div className="thumbnail_image" key={video_json.id}>
+                          <Link to={"/videos/" + video_id}>
                             <img
-                              src={video_json.video_thumbnail_url}
+                              src={video_json.thumbnail_url}
                               alt="Video thumbnail"
-                              className="img-fluid"
+                              className="img-fluid w-100 h-100"
                             />
                           </Link>
                         </div>
                         <div className="home_thumbnail_title">
-                          <h6 className="my-3" href={video_json.video_url}>
-                            {video_json.video_title}
+                          <h6 className="my-3" href={""}>
+                            {video_json.title}
                           </h6>
                         </div>
                         <div className="home_channel_description d-flex">
-                          <div className="channel_logo border">
+                          <div className="channel_logo ">
                             <img
-                              src={video_json.channel_logo_url}
+                              src={video_json.channel.profile_image_url}
                               href={video_json.video_url}
-                              alt="Video Thumbnail"
+                              alt="Channel Thumbnail"
                             />
                           </div>
+
                           <div className="channel_description ms-2 ">
-                            <p>{video_json.channel_name}</p>
-                            <p>9.24M subscribers</p>
-                            <p>{video_json.video_published_date}</p>
+                            <p>{video_json.channel.name}</p>
+                            {/* <p>{video_json.channel_name}</p> */}
+                            <p>
+                              {video_json.view_count +
+                                " views ⦁ " +
+                                video_json.published_at}
+                            </p>
                           </div>
                         </div>
                       </div>
