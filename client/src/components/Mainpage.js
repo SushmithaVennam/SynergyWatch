@@ -116,25 +116,26 @@ const Mainpage = (props) => {
                             {video_json.title}
                           </h6>
                         </div>
-                        <div className="home_channel_description d-flex">
-                          <div className="channel_logo ">
-                            <img
-                              src={video_json.channel.profile_image_url}
-                              href={video_json.video_url}
-                              alt="Channel Thumbnail"
-                            />
-                          </div>
+                        {video_json.channel && (
+                          <div className="home_channel_description d-flex">
+                            <div className="channel_logo ">
+                              <img
+                                src={video_json.channel.profile_image_url}
+                                href={video_json.video_url}
+                                alt="Channel Thumbnail"
+                              />
+                            </div>
 
-                          <div className="channel_description ms-2 ">
-                            <p>{video_json.channel.name}</p>
-                            {/* <p>{video_json.channel_name}</p> */}
-                            <p>
-                              {video_json.view_count +
-                                " views ⦁ " +
-                                video_json.published_at}
-                            </p>
+                            <div className="channel_description ms-2 ">
+                              <p>{video_json.channel.name}</p>
+                              <p>
+                                {video_json.view_count +
+                                  " views ⦁ " +
+                                  video_json.published_at}
+                              </p>
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     ))}
                   </div>
