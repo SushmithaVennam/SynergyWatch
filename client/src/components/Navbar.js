@@ -43,9 +43,13 @@ function MyNavbar(props) {
               ></i>
             </Button>
           </div>
-          <div>
-            <i className="ri-user-fill"></i>
-          </div>
+          <Button variant="btn-outline">
+            <img
+              className="userprofile"
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+              alt="Profile"
+            />
+          </Button>
           <div>
             <Button variant="outline-info" size="sm" onClick={LogoutHandler}>
               Logout

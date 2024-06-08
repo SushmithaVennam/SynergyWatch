@@ -23,3 +23,11 @@
     background-color: #1f2023;
     color: #efefef;
   }
+
+.normalText {
+    color: #1f2023;
+  }
+.userprofile {
+    height: 30px;
+    width: 30px;
+}

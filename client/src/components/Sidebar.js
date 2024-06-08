@@ -4,14 +4,12 @@ import { TiHome } from "react-icons/ti";
 import { FaFire } from "react-icons/fa";
 import { SiYoutubegaming } from "react-icons/si";
 import { FaSave } from "react-icons/fa";
-// import { BiSolidLike } from "react-icons/bi";
-
 import "remixicon/fonts/remixicon.css";
 import "./Sidebar.css";
 
 const Sidebar = (props) => {
   return (
-    <div>
+    <div className="min-vh-100 d-flex flex-column justify-content-between ">
       <section className={`sidebar-component sticky-top`}>
         <div className="container-fluid pl-5 pt-4">
           <Link
@@ -51,6 +49,30 @@ const Sidebar = (props) => {
           </Link>
         </div>
       </section>
+
+      <div className="d-flex ms-2 flex-column mb-3 justify-content-start">
+        <p>CONTACT US</p>
+        <div className="d-flex justify-content-between width-100-px">
+          <img
+            className="socialmedia"
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
+            alt="facebook logo"
+          ></img>
+          <img
+            className="socialmedia"
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png"
+            alt="twitter logo"
+          ></img>
+          <img
+            className="socialmedia"
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
+            alt="linked in logo"
+          ></img>
+        </div>
+        <p className="mt-2 width-170-px">
+          Enjoy! Now to see your channels and recommendations!
+        </p>
+      </div>
     </div>
   );
 };

@@ -5,12 +5,13 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
-import logo_light from "../resources/PFXWatchWhite.png";
 import logo_dark from "../resources/PFXWatchBlack.png";
 import "./VideoGrid.css";
+import "./Mainpage.css";
 
 const Mainpage = (props) => {
   const [showPay, setshowPay] = useState(true);
+  const notTheme = props.props.curTheme === "light" ? "dark" : "light";
   const handleClosePay = () => {
     setshowPay(false);
   };
@@ -34,48 +35,31 @@ const Mainpage = (props) => {
           </div>
           <div className={`col-md-9 container`}>
             {showPay && (
-              <section>
-                <div
-                  style={{ backgroundImage: "url(" }}
-                  className="col text-right"
-                >
-                  <Button
-                    onClick={handleClosePay}
-                    variant={`outline-${
-                      props.props.curTheme === "light" ? "dark" : "light"
-                    }`}
-                    size="sm"
-                    className={`${props.props.curTheme} btn btn-primary`}
-                  >
-                    Close
+              <section className="Banner d-flex justify-content-between">
+                <div className="col text-right">
+                  <div className="d-flex w-100 justify-content-between">
+                    <img
+                      alt="logo"
+                      src={logo_dark}
+                      width="100px"
+                      height="25px"
+                    ></img>
+                    <Button
+                      onClick={handleClosePay}
+                      variant={`light`}
+                      size="sm"
+                    >
+                      X
+                    </Button>
+                  </div>
+                  <p className="normalText">
+                    Buy PFX watch Premium prepaid plans with UPI
+                  </p>
+
+                  <Button variant={`outline-dark`} size="sm" className="light">
+                    GET IT NOW
                   </Button>
                 </div>
-                <img
-                  alt="logo"
-                  src={props.props.curTheme !== "dark" ? logo_light : logo_dark}
-                  width={"100px"}
-                ></img>
-                <p>Buy PFX watch Premium prepaid plans with UPI</p>
-
-                <Button
-                  variant={`outline-${
-                    props.props.curTheme === "light" ? "dark" : "light"
-                  }`}
-                  size="sm"
-                  className={props.props.curTheme}
-                >
-                  GET IT NOW
-                </Button>
-                <Button
-                  onClick={handleClosePay}
-                  variant={`outline-${
-                    props.props.curTheme === "light" ? "dark" : "light"
-                  }`}
-                  size="sm"
-                  className={props.props.curTheme}
-                >
-                  Close
-                </Button>
               </section>
             )}
 
@@ -86,9 +70,7 @@ const Mainpage = (props) => {
                 aria-describedby="basic-addon2"
               />
               <Button
-                variant={`outline-${
-                  props.props.curTheme === "light" ? "dark" : "light"
-                }`}
+                variant={`outline-${notTheme}`}
                 // variant={`outline-secondary`}
                 size="sm"
                 className="input-group-append ri-search-line"
@@ -96,7 +78,7 @@ const Mainpage = (props) => {
               ></Button>
             </InputGroup>
 
-            <div className="thumbnail_container border">
+            <div className="thumbnail_container">
               <section className="thumbnails_layout">
                 <div className="container">
                   <div className="row">
@@ -139,7 +121,6 @@ const Mainpage = (props) => {
                       </div>
                     ))}
                   </div>
-                  {/* row */}
                 </div>
               </section>
             </div>
