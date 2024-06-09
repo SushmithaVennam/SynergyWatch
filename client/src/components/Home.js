@@ -5,21 +5,12 @@ import Cookies from "js-cookie";
 import data from "../resources/all.json";
 const Home = () => {
   // const port = 4444;
-  const [videosArray, setVideosArray] = useState(data.videos);
+  const videosArray = data.videos;
   // const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const ToggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
-  };
-
-  const SearchHandler = (keyword) => {
-    const filterdData = data.filter((video_json) =>
-      video_json.video_title.toLowerCase().includes(keyword.toLowerCase())
-    );
-    setVideosArray(filterdData);
-    // console.log(filterdData);
-    console.log("Searched for '" + keyword + "'");
   };
 
   useEffect(() => {
@@ -79,7 +70,6 @@ const Home = () => {
   const props = {
     themesetter: ToggleTheme,
     curTheme: theme,
-    searchHandler: SearchHandler,
     videos: videosArray,
     src: "Home",
   };
