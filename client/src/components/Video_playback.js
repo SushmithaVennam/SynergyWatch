@@ -8,13 +8,14 @@ import data from "../resources/30b642bd-7591-49f4-ac30-5c538f975b15.json";
 
 function Video_playback() {
   // const port = 4444;
-  const video_json = data.video_details;
-  // const [savebutton, setSaveButton] = useState("ri-save-line");
-  // const [dislikebutton, setDisLikeButton] = useState("ri-thumb-down-line");
-  // const [likebutton, setLikeButton] = useState("ri-thumb-up-line");
-  const savebutton = "ri-save-line";
-  const dislikebutton = "ri-thumb-down-line";
-  const likebutton = "ri-thumb-up-line";
+  const [video_json, setVideo] = useState(
+    JSON.parse(localStorage.getItem("video_json")) || data.video_details
+  );
+  const savebutton = video_json.saved ? "ri-save-fill" : "ri-save-line";
+  const dislikebutton = video_json.disliked
+    ? "ri-thumb-down-fill"
+    : "ri-thumb-down-line";
+  const likebutton = video_json.liked ? "ri-thumb-up-fill" : "ri-thumb-up-line";
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const ToggleTheme = () => {
@@ -28,37 +29,18 @@ function Video_playback() {
     window.location.href = "/login";
   }
 
-  // const saveVideo = async (id) => {
-  //   const uri = `http://localhost:${port}/save-video`;
-  //   var jsonbody = {
-  //     id: id,
-  //     video_saved: "True",
-  //   };
-  //   if (video_json.video_saved === "True") {
-  //     jsonbody = {
-  //       id: id,
-  //       video_saved: "False",
-  //     };
-  //     setSaveButton("ri-save-line");
-  //     video_json.video_saved = "False";
-  //   } else {
-  //     video_json.video_saved = "True";
-  //     setSaveButton("ri-save-fill");
-  //   }
-
-  //   console.log(jsonbody);
-  //   try {
-  //     const response = await fetch(uri, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: jwtToken,
-  //       },
-  //       body: JSON.stringify({ jsonbody }),
-  //     });
-  //   } catch (error) {}
-  // };
-
+  const saveVideo = () => {
+    const flag = video_json.saved ? false : true;
+    setVideo({ ...video_json, saved: flag });
+  };
+  const likeVideo = () => {
+    const flag = video_json.liked ? false : true;
+    setVideo({ ...video_json, liked: flag });
+  };
+  const dislikeVideo = () => {
+    const flag = video_json.saved ? false : true;
+    setVideo({ ...video_json, disliked: flag });
+  };
   // const likeVideo = async (id) => {
   //   // const uri = `http://localhost:${port}/like-video`;
   //   var jsonbody = {
@@ -78,7 +60,6 @@ function Video_playback() {
   //     //   video_json.video_saved = "True";
   //     setLikeButton("ri-thumb-up-line");
   //   }
-
   //   // console.log(jsonbody);
   //   // try {
   //   //   const response = await fetch(uri, {
@@ -91,7 +72,6 @@ function Video_playback() {
   //   //   });
   //   // } catch (error) {}
   // };
-
   // const dislikeVideo = async (id) => {
   //   if (dislikebutton === "ri-thumb-down-line") {
   //     setDisLikeButton("ri-thumb-down-fill");
@@ -102,6 +82,9 @@ function Video_playback() {
   // };
 
   localStorage.setItem("theme", theme);
+  localStorage.setItem("video_json", JSON.stringify(video_json));
+  console.log(JSON.stringify(video_json));
+
   return (
     <div className={theme}>
       <section className="nav_bar_component">
@@ -144,7 +127,7 @@ function Video_playback() {
                   variant={`btn-outline`}
                   size="sm"
                   className={`${likebutton}  ${theme}`}
-                  // onClick={() => likeVideo(video_json._id)}
+                  onClick={likeVideo}
                 >
                   Like
                 </Button>
@@ -152,7 +135,7 @@ function Video_playback() {
                   variant={`btn-outline`}
                   size="sm"
                   className={`${dislikebutton}  ${theme}`}
-                  // onClick={() => dislikeVideo(video_json._id)}
+                  onClick={dislikeVideo}
                 >
                   Dislike
                 </Button>
@@ -160,7 +143,7 @@ function Video_playback() {
                   variant={`btn-outline`}
                   size="sm"
                   className={`${savebutton}  ${theme}`}
-                  // onClick={() => saveVideo(video_json._id)}
+                  onClick={saveVideo}
                 >
                   Save
                 </Button>

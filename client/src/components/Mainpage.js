@@ -20,15 +20,18 @@ const Mainpage = (props) => {
       : "https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png";
   const searchEmpty =
     "https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png";
+
+  localStorage.setItem("theme", props.props.curTheme);
+  const video_id = "30b642bd-7591-49f4-ac30-5c538f975b15";
+
   const handleClosePay = () => {
     setshowPay(false);
   };
-  localStorage.setItem("theme", props.props.curTheme);
-  const video_id = "30b642bd-7591-49f4-ac30-5c538f975b15";
 
   const handleSearchInputChange = (e) => {
     setSearchString(e.target.value);
   };
+
   const searchHandler = () => {
     const data = props.props.videos;
 
@@ -72,11 +75,15 @@ const Mainpage = (props) => {
                       X
                     </Button>
                   </div>
-                  <p className="normalText">
+                  <p className="normalText ps-1">
                     Buy PFX watch Premium prepaid plans with UPI
                   </p>
 
-                  <Button variant={`outline-dark`} size="sm" className="light">
+                  <Button
+                    variant={`outline-dark`}
+                    size="sm"
+                    className="light ms-1"
+                  >
                     GET IT NOW
                   </Button>
                 </div>
@@ -89,6 +96,7 @@ const Mainpage = (props) => {
                 aria-label="Search"
                 aria-describedby="basic-addon2"
                 onChange={handleSearchInputChange}
+                className="ms-1"
               />
               <Button
                 variant={`outline-${notTheme}`}

@@ -3,7 +3,7 @@ import Mainpage from "./Mainpage";
 import "remixicon/fonts/remixicon.css";
 import Cookies from "js-cookie";
 
-const Saved = () => {
+const Liked = () => {
   // const port = 4444;
   const [videosArray, setVideos] = useState(
     JSON.parse("[" + localStorage.getItem("video_json") + "]") || []
@@ -29,7 +29,7 @@ const Saved = () => {
 
   const fetchVideos = () => {
     console.log(videosArray);
-    const filterdData = videosArray.filter((video_json) => video_json.saved);
+    const filterdData = videosArray.filter((video_json) => video_json.liked);
     setVideos(filterdData);
 
     setLoading(false);
@@ -39,7 +39,7 @@ const Saved = () => {
     themesetter: ToggleTheme,
     curTheme: theme,
     videos: videosArray,
-    src: "Saved",
+    src: "Liked",
   };
 
   return (
@@ -49,4 +49,4 @@ const Saved = () => {
   );
 };
 
-export default Saved;
+export default Liked;

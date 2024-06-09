@@ -4,6 +4,7 @@ import { TiHome } from "react-icons/ti";
 import { FaFire } from "react-icons/fa";
 import { SiYoutubegaming } from "react-icons/si";
 import { FaSave } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import "remixicon/fonts/remixicon.css";
 import "./Sidebar.css";
 
@@ -46,6 +47,15 @@ const Sidebar = (props) => {
             to="/saved"
           >
             <FaSave style={{ marginRight: "20px" }} /> Saved videos
+          </Link>
+
+          <Link
+            className={`d-block pb-2 sidebar_content ${
+              props.props.srcpage === "Liked" ? "active_icon" : ""
+            }`}
+            to="/liked"
+          >
+            <FaHeart style={{ marginRight: "20px" }} /> Liked videos
           </Link>
         </div>
       </section>
