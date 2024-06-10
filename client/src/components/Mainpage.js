@@ -12,16 +12,22 @@ import "./Mainpage.css";
 const Mainpage = (props) => {
   const [showPay, setshowPay] = useState(true);
   const [searchString, setSearchString] = useState("");
-  const notTheme = props.props.curTheme === "light" ? "dark" : "light";
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const notTheme = theme === "light" ? "dark" : "light";
   const [filteredVideos, setVideos] = useState(props.props.videos);
   const notconnected =
-    props.props.curTheme === "light"
+    theme === "light"
       ? "https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
       : "https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png";
   const searchEmpty =
     "https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png";
 
-  localStorage.setItem("theme", props.props.curTheme);
+  localStorage.setItem("theme", theme);
+
+  const ToggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   const video_id = "30b642bd-7591-49f4-ac30-5c538f975b15";
 
   const handleClosePay = () => {
@@ -40,14 +46,15 @@ const Mainpage = (props) => {
     );
     setVideos(filterdData);
   };
-  // console.log(props.props.videos);
+  console.log("MainPage : " + props.props.videos.length);
+
   return (
-    <div>
+    <div className={theme}>
       <section className="nav_bar_component">
         <MyNavbar
           props={{
-            toggleTheme: props.props.themesetter,
-            Theme: props.props.curTheme,
+            toggleTheme: ToggleTheme,
+            Theme: theme,
           }}
         />
       </section>
@@ -58,8 +65,8 @@ const Mainpage = (props) => {
           </div>
           <div className={`col-md-9 container`}>
             {showPay && (
-              <section className="Banner d-flex justify-content-between">
-                <div className="col text-right">
+              <section className="Banner">
+                <div>
                   <div className="d-flex w-100 justify-content-between">
                     <img
                       alt="logo"
@@ -78,12 +85,7 @@ const Mainpage = (props) => {
                   <p className="normalText ps-1">
                     Buy PFX watch Premium prepaid plans with UPI
                   </p>
-
-                  <Button
-                    variant={`outline-dark`}
-                    size="sm"
-                    className="light ms-1"
-                  >
+                  <Button variant={`outline-dark`} size="sm" className="ms-1">
                     GET IT NOW
                   </Button>
                 </div>
@@ -111,7 +113,8 @@ const Mainpage = (props) => {
               <section className="thumbnails_layout">
                 <div className="container">
                   <div className="row">
-                    {props.props.videos.length > 0 ? (
+                    {props.props.videos !== null &&
+                    props.props.videos.length > 0 ? (
                       filteredVideos.length > 0 ? (
                         filteredVideos.map((video_json, index) => (
                           <div className="col-md-4 my-3">
@@ -137,7 +140,6 @@ const Mainpage = (props) => {
                                 <div className="channel_logo ">
                                   <img
                                     src={video_json.channel.profile_image_url}
-                                    href={video_json.video_url}
                                     alt="Channel Thumbnail"
                                   />
                                 </div>

@@ -4,18 +4,10 @@ import "remixicon/fonts/remixicon.css";
 import Cookies from "js-cookie";
 
 const Liked = () => {
-  // const port = 4444;
   const [videosArray, setVideos] = useState(
     JSON.parse("[" + localStorage.getItem("video_json") + "]") || []
   );
   const [loading, setLoading] = useState("Loading");
-
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  const ToggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-
   useEffect(() => {
     const jwtToken = Cookies.get("jwt_token");
     if (jwtToken === undefined) {
@@ -36,14 +28,12 @@ const Liked = () => {
   };
 
   const props = {
-    themesetter: ToggleTheme,
-    curTheme: theme,
     videos: videosArray,
     src: "Liked",
   };
 
   return (
-    <div className={theme}>
+    <div>
       <Mainpage props={props} />
     </div>
   );

@@ -5,7 +5,6 @@ import { FaFire } from "react-icons/fa";
 import { SiYoutubegaming } from "react-icons/si";
 import { FaSave } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import "remixicon/fonts/remixicon.css";
 import "./Sidebar.css";
 
 const Sidebar = (props) => {

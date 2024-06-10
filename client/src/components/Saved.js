@@ -10,12 +10,6 @@ const Saved = () => {
   );
   const [loading, setLoading] = useState("Loading");
 
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  const ToggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-
   useEffect(() => {
     const jwtToken = Cookies.get("jwt_token");
     if (jwtToken === undefined) {
@@ -36,14 +30,12 @@ const Saved = () => {
   };
 
   const props = {
-    themesetter: ToggleTheme,
-    curTheme: theme,
     videos: videosArray,
     src: "Saved",
   };
 
   return (
-    <div className={theme}>
+    <div>
       <Mainpage props={props} />
     </div>
   );

@@ -35,19 +35,16 @@ function MyNavbar(props) {
               variant="outline-info"
               size="sm"
               onClick={props.props.toggleTheme}
-            >
-              <i
-                className={
-                  props.props.Theme !== "dark" ? "ri-moon-fill" : "ri-sun-fill"
-                }
-              ></i>
-            </Button>
+              className={
+                props.props.Theme !== "dark" ? "ri-moon-fill" : "ri-sun-fill"
+              }
+            ></Button>
           </div>
           <Button variant="btn-outline">
             <img
               className="userprofile"
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-              alt="Profile"
+              alt="profile"
             />
           </Button>
           <div>

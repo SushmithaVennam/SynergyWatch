@@ -1,0 +1,22 @@
+Resources
+Image URLs
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png
+
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png alt should be profile
+
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png
+
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png alt should be no 
+
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png alt should be no saved videos
+
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-dark-theme-img.png
+
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png Banner Background image
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png alt should be facebook logo
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png alt should be twitter logo
+⦁	https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png alt should be linked in logo
+

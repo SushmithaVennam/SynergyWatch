@@ -40,7 +40,6 @@ export const Register = (props) => {
         .then((response) => {
           var data = response.json();
           if (response.ok) {
-            // alert("Logged in succesfully");
           }
           return data;
         })
@@ -64,7 +63,6 @@ export const Register = (props) => {
       <Form
         onSubmit={submitForm}
         className="rounded-4 border"
-        // className=" m-4"
         style={{ padding: "20px" }}
       >
         <Form.Group

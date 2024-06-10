@@ -67,7 +67,7 @@ export const Login = (props) => {
         // className=" m-4"
         style={{ padding: "20px" }}
       >
-        <img src={light_theme_logo} width={"100px"}></img>
+        <img src={light_theme_logo} width={"100px"} alt="logo"></img>
         <Form.Group
           as={Row}
           className="mb-3 mt-3 form-control-sm"
