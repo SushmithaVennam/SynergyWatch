@@ -38,7 +38,7 @@ function Video_playback() {
     setVideo({ ...video_json, liked: flag });
   };
   const dislikeVideo = () => {
-    const flag = video_json.saved ? false : true;
+    const flag = video_json.disliked ? false : true;
     setVideo({ ...video_json, disliked: flag });
   };
   localStorage.setItem("theme", theme);
