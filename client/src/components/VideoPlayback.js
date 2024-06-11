@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import MyNavbar from "./Navbar";
 import Sidebar from "./Sidebar";
@@ -8,32 +8,15 @@ import data from "../resources/30b642bd-7591-49f4-ac30-5c538f975b15.json";
 
 function Video_playback() {
   // const port = 4444;
-  const [video_json, setVideo] = useState(data.video_details);
-  const [loading, setLoading] = useState("Loading");
+  const [video_json, setVideo] = useState(
+    JSON.parse(localStorage.getItem("video_json")) || data.video_details
+  );
   const savebutton = video_json.saved ? "ri-save-fill" : "ri-save-line";
   const dislikebutton = video_json.disliked
     ? "ri-thumb-down-fill"
     : "ri-thumb-down-line";
   const likebutton = video_json.liked ? "ri-thumb-up-fill" : "ri-thumb-up-line";
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  useEffect(() => {
-    const jwtToken = Cookies.get("jwt_token");
-    if (jwtToken === undefined) {
-      Cookies.remove("jwt_token");
-      window.location.href = "/login";
-    }
-    if (loading) {
-      fetchVideos();
-    }
-  });
-
-  const fetchVideos = () => {
-    const savedV = JSON.parse(localStorage.getItem("video_json"));
-    if (savedV !== null && savedV.saved) setVideo(savedV);
-    console.log("VideoPlayback:" + video_json);
-    setLoading(false);
-  };
 
   const ToggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
