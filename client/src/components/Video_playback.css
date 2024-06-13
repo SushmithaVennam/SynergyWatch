@@ -2,3 +2,30 @@
     margin-bottom: 0;
     font-size: 10px;
 }
+
+.vidcontainer {
+    width: 100%;
+}
+
+.vidcontainer img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .vidcontainer button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+.ytp-button {
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.thumbnail {
+    cursor: pointer;
+}

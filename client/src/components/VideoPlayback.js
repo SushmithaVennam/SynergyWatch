@@ -41,9 +41,11 @@ function Video_playback() {
     const flag = video_json.disliked ? false : true;
     setVideo({ ...video_json, disliked: flag });
   };
+
+  const [playvideo, setPlay] = useState(false);
+
   localStorage.setItem("theme", theme);
   localStorage.setItem("video_json", JSON.stringify(video_json));
-  console.log(JSON.stringify(video_json));
 
   return (
     <div className={theme}>
@@ -65,11 +67,45 @@ function Video_playback() {
           <div className="col-md-9 container">
             <Container>
               <div className="ratio ratio-16x9">
-                <iframe
-                  src={video_json.video_url}
-                  title="YouTube video player"
-                  allowFullScreen
-                ></iframe>
+                {playvideo ? (
+                  <iframe
+                    src="https://www.youtube.com/embed/wB6IFCeTssk?autoplay=1"
+                    title="YouTube video player"
+                    allowFullScreen
+                  ></iframe>
+                ) : (
+                  <div className="vidcontainer">
+                    <img
+                      className="thumbnail"
+                      src={video_json.thumbnail_url}
+                      onClick={() => {
+                        setPlay(true);
+                      }}
+                    />
+                    <button
+                      class="ytp-large-play-button ytp-button ytp-large-play-button-red-bg"
+                      aria-label="Play"
+                      title="Play"
+                      onClick={() => {
+                        setPlay(true);
+                      }}
+                    >
+                      <svg
+                        height="100px"
+                        version="1.1"
+                        viewBox="0 0 68 48"
+                        width="100px"
+                      >
+                        <path
+                          class="ytp-large-play-button-bg"
+                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"
+                          fill="#f00"
+                        ></path>
+                        <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                      </svg>
+                    </button>
+                  </div>
+                )}
               </div>
             </Container>
             <div className="my-3">
@@ -122,7 +158,11 @@ function Video_playback() {
               </div>
             </div>
             <div>
-              <p className="p-2">{video_json.description}</p>
+              <p className="p-2">
+                {video_json.description
+                  ? video_json.description
+                  : video_json.title}
+              </p>
             </div>
           </div>
         </div>

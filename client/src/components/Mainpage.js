@@ -28,7 +28,7 @@ const Mainpage = (props) => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
-  const video_id = "30b642bd-7591-49f4-ac30-5c538f975b15";
+  // const video_id = "30b642bd-7591-49f4-ac30-5c538f975b15";
 
   const handleClosePay = () => {
     setshowPay(false);
@@ -47,6 +47,10 @@ const Mainpage = (props) => {
     setVideos(filterdData);
   };
   console.log("MainPage : " + props.props.videos.length);
+
+  const saveVideoJson = (video_json) => {
+    localStorage.setItem("video_json", JSON.stringify(video_json));
+  };
 
   return (
     <div className={theme}>
@@ -122,11 +126,15 @@ const Mainpage = (props) => {
                               className="thumbnail_image"
                               key={video_json.id}
                             >
-                              <Link to={"/videos/" + video_id}>
+                              <Link to={"/videos/" + video_json.id}>
                                 <img
                                   src={video_json.thumbnail_url}
                                   alt="Video thumbnail"
                                   className="img-fluid w-100 h-100"
+                                  onClick={() => {
+                                    console.log(JSON.stringify(video_json));
+                                    saveVideoJson(video_json);
+                                  }}
                                 />
                               </Link>
                             </div>
