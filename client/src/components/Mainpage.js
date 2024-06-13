@@ -36,6 +36,7 @@ const Mainpage = (props) => {
 
   const handleSearchInputChange = (e) => {
     setSearchString(e.target.value);
+    searchHandler();
   };
 
   const searchHandler = () => {
