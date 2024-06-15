@@ -15,18 +15,12 @@
     text-decoration: none;
 }
 
-.active_icon {
-    color : red
-}
-
 .socialmedia{
     width:25px;
 }
 
-.width-100-px {
-    width:100px;
-}
-
-.width-170-px {
-    width:170px;
+.Sidebar{
+    display: flex;
+    background-color: white;
+    padding: 10px;
 }

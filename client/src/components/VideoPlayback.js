@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import MyNavbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Sidebar from "./SideBar";
 import Cookies from "js-cookie";
 import "./Video_playback.css";
 import data from "../resources/30b642bd-7591-49f4-ac30-5c538f975b15.json";
@@ -81,6 +81,7 @@ function Video_playback() {
                       onClick={() => {
                         setPlay(true);
                       }}
+                      alt="Video Thumbnail"
                     />
                     <button
                       class="ytp-large-play-button ytp-button ytp-large-play-button-red-bg"

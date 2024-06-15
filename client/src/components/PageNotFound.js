@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MyNavbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Sidebar from "./SideBar";
 import Button from "react-bootstrap/Button";
 import logo_dark from "../resources/PFXWatchBlack.png";
 import "./VideoGrid.css";
