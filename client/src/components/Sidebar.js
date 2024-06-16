@@ -9,13 +9,14 @@ import { FaSave } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
 const SideBar = (props) => {
+  const minWidthText = "(min-width: 768px)";
   const [showText, setshowText] = useState(
-    window.matchMedia("(min-width: 750px)").matches
+    window.matchMedia(minWidthText).matches
   );
 
   useEffect(() => {
     window
-      .matchMedia("(min-width: 750px)")
+      .matchMedia(minWidthText)
       .addEventListener("change", (e) => setshowText(e.matches));
   }, []);
 
@@ -23,31 +24,31 @@ const SideBar = (props) => {
     {
       ref: "/home",
       icon: <TiHome />,
-      text: "Home",
+      key: "Home",
       current: props.props.srcpage === "Home",
     },
     {
       ref: "/trending",
       icon: <FaFire />,
-      text: "Trending",
+      key: "Trending",
       current: props.props.srcpage === "Trending",
     },
     {
       ref: "/gaming",
       icon: <SiYoutubegaming />,
-      text: "Gaming",
+      key: "Gaming",
       current: props.props.srcpage === "Gaming",
     },
     {
       ref: "/saved",
       icon: <FaSave />,
-      text: "Saved videos",
+      key: "Saved videos",
       current: props.props.srcpage === "Saved",
     },
     {
       ref: "/liked",
       icon: <FaHeart />,
-      text: "Liked videos",
+      key: "Liked videos",
       current: props.props.src === "Liked",
     },
   ];
@@ -55,15 +56,15 @@ const SideBar = (props) => {
   const social_media = [
     {
       src: "https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png",
-      alt: "facebook logo",
+      key: "facebook logo",
     },
     {
       src: "https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png",
-      alt: "twitter logo",
+      key: "twitter logo",
     },
     {
       src: "https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png",
-      alt: "linked in logo",
+      key: "linked in logo",
     },
   ];
 
@@ -71,35 +72,40 @@ const SideBar = (props) => {
 
   return (
     <div>
-      <section className={`sidebar-component sticky-top`}>
-        <Container className=" w-100">
+      <section
+        className={`min-vh-100 d-flex flex-column justify-content-between sticky-top`}
+        style={{ position: "fixed", marginTop: "50px" }}
+      >
+        <Container className="w-100">
           {list.map((obj) => (
-            <Nav.Link href={obj.ref}>
+            <Nav.Link href={obj.ref} key={obj.key}>
               <Row>
                 <Col xs={1} className={`${obj.current ? "active_icon" : ""}`}>
                   {obj.icon}
                 </Col>
-                {showText && <Col>{obj.text}</Col>}
+                {showText && <Col>{obj.key}</Col>}
               </Row>
             </Nav.Link>
           ))}
         </Container>
-      </section>
 
-      <section className={`sidebar-component sticky-bottom`}>
-        <div className="d-flex ms-2 flex-column mb-3 ">
+        <div
+          className="d-flex ms-2 flex-column my-p"
+          style={{ height: "200px" }}
+        >
           {showText && <p>CONTACT US</p>}
 
           <div
-            className={`d-flex ms-2 width-100-px ${
+            className={`d-flex width-100-px ${
               showText ? "flex-row" : "flex-column"
             }`}
           >
             {social_media.map((obj) => (
               <img
+                key={obj.key}
                 className="socialmedia_icon"
                 src={obj.src}
-                alt={obj.alt}
+                alt={obj.key}
               ></img>
             ))}
           </div>

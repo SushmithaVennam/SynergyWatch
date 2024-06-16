@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MyNavbar from "./Navbar";
 import SideBar from "./SideBar";
 import Button from "react-bootstrap/Button";
@@ -27,6 +27,17 @@ const Mainpage = (props) => {
   const ToggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
+
+  const minWidthText = "(min-width: 768px)";
+  const [narrowmode, setnarrowmode] = useState(
+    window.matchMedia(minWidthText).matches
+  );
+
+  useEffect(() => {
+    window
+      .matchMedia(minWidthText)
+      .addEventListener("change", (e) => setnarrowmode(e.matches));
+  }, []);
 
   // const video_id = "30b642bd-7591-49f4-ac30-5c538f975b15";
 
@@ -65,7 +76,7 @@ const Mainpage = (props) => {
         <div className="col-md-3 ">
           <SideBar props={{ srcpage: props.props.src }} />
         </div>
-        <div className={`col-md-9 container`}>
+        <div className={`col-md-9 container width-100`}>
           {showPay && (
             <section className="Banner">
               <div>
@@ -115,7 +126,7 @@ const Mainpage = (props) => {
                   props.props.videos.length > 0 ? (
                     filteredVideos.length > 0 ? (
                       filteredVideos.map((video_json, index) => (
-                        <div className="col-md-4 my-3">
+                        <div className="col-md-4 my-3" key={index}>
                           <div className="thumbnail_image" key={video_json.id}>
                             <Link to={"/videos/" + video_json.id}>
                               <img

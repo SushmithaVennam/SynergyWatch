@@ -1,22 +1,6 @@
-.sidebar-component {
-    height: 30vh;
-}
-
-/* body {
-    overflow:hidden;
-} */
-
-.sidebar_content i{
-    font-size: 20px;
-}
-
-.sidebar_content{
-    font-size: 18px;
-    text-decoration: none;
-}
-
 .socialmedia{
     width:25px;
+    padding: 2px;
 }
 
 .Sidebar{
