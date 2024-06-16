@@ -135,9 +135,7 @@ app.post("/get-one-video", middleware, async (req, res) => {
 
 app.post("/signup", async (req, res) => {
   try {
-    // const { name, email, phno, address, password } = req.body;
-    const { email, password } = req.body;
-    const checkUser = await userslistDB.findOne({ email: email });
+    const checkUser = await userslistDB.findOne({ email: req.body.email });
     if (checkUser) {
       console.log("User already exists");
       return res
@@ -162,26 +160,26 @@ app.post("/signup", async (req, res) => {
 // login api
 app.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const userExist = await userslistDB.findOne({ email: email });
+    const { username, password } = req.body;
+    const userExist = await userslistDB.findOne({ username: username });
     if (!userExist) {
-      console.log("User " + email + " doesn't exist");
+      console.log("User " + username + " doesn't exist");
       return res
         .status(406)
         .json({ message: "User doesnot exist. Please register as new user" });
     }
-    // const passwordMatched = await bcrypt.compare(password, userExist.password);
+
     if (userExist.password != password) {
       console.log("Invalid password " + password);
       return res
         .status(401)
         .json({ message: "Username or Password is Invalid." });
     }
-    const token = jwt.sign({ email: userExist.email }, "secretToken", {
-      expiresIn: "1hr",
+    const token = jwt.sign({ username: userExist.username }, "secretToken", {
+      expiresIn: "6hr",
     });
     //create json webtoken
-    console.log("User " + email + " logged in succesfully");
+    console.log("User " + username + " logged in succesfully");
     return res.status(200).json({ message: "loggedin successfully", token });
   } catch (error) {
     console.log("Login failed : " + error.message);

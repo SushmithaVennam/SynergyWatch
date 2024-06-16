@@ -1,20 +1,26 @@
 import React, { useState } from "react";
+import { Container, Image } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import black_theme_logo from "../resources/PFXWatchWhite.png";
 import light_theme_logo from "../resources/PFXWatchBlack.png";
 
 export const Login = (props) => {
-  // const [cookies, setCookie, removeCookie] = useCookies(["myCookie"]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showWrongPassword, setShowWrongPassword] = useState(false);
+  const theme =
+    localStorage.getItem("theme") === "dark" ? "dark" : "light" || "light";
+  const logo = theme !== "dark" ? light_theme_logo : black_theme_logo;
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  // Set a cookie
+  const handleShowPasswordChange = (event) => {
+    setShowPassword(event.target.checked);
+  };
+
   const port = 4444;
   const handleFormData = (event) => {
     const { name, value } = event.target;
@@ -47,8 +53,9 @@ export const Login = (props) => {
         });
         console.log(data.message + ". Now navigating to home");
         window.location.href = "/home";
-      } else {
-        alert(data.message + " Please enter valid username and password");
+      } else if (response.status === 401) {
+        setShowWrongPassword(true);
+        console.log(data.message + " Please enter valid username and password");
       }
     } catch (error) {
       console.log("Failed to " + error.message);
@@ -58,65 +65,61 @@ export const Login = (props) => {
 
   return (
     <div
-      className="d-flex justify-content-center align-items-center"
+      className={`d-flex justify-content-center align-items-center ${theme}`}
       style={{ position: "relative", height: "100vh" }}
     >
       <Form
         onSubmit={submitForm}
-        className="rounded-4 border"
-        // className=" m-4"
-        style={{ padding: "20px" }}
+        className="rounded-2 border"
+        style={{ padding: "20px", width: "400px" }}
       >
-        <img src={light_theme_logo} width={"100px"} alt="logo"></img>
+        <Container className="text-center">
+          <Image src={logo} width={"125px"} alt="logo" />
+        </Container>
         <Form.Group
-          as={Row}
           className="mb-3 mt-3 form-control-sm"
-          controlId="formHoizontalEmail"
+          controlId="formHoizontalUsername"
         >
-          <Form.Label column sm={3}>
-            Email
-          </Form.Label>
-          <Col sm={9}>
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              className="form-control-sm"
-              name="email"
-              value={formData.email}
-              onChange={handleFormData}
-            />
-          </Col>
+          <Form.Label>USERNAME</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Username"
+            name="username"
+            value={formData.username}
+            onChange={handleFormData}
+          />
         </Form.Group>
 
         <Form.Group
-          as={Row}
           className="mb-3 mt-3 form-control-sm"
-          controlId="formHoizontalpassword"
+          controlId="formHoizontalPassword"
         >
-          <Form.Label column sm={3}>
-            Password
-          </Form.Label>
-          <Col sm={9}>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              className="form-control-sm"
-              name="password"
-              value={formData.password}
-              onChange={handleFormData}
-            />
-          </Col>
+          <Form.Label>PASSWORD</Form.Label>
+          <Form.Control
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            name="password"
+            value={formData.password}
+            onChange={handleFormData}
+          />
+          <Form.Check
+            className="mt-2"
+            type="checkbox"
+            id="showpassword-checkbox"
+            label="Show Password"
+            onChange={handleShowPasswordChange}
+          />
         </Form.Group>
-
         <div className="d-grid gap-2 mb-3">
           <Button size="md" type="submit">
-            Sign In
+            Login
           </Button>
+          {showWrongPassword && (
+            <Form.Text as="small" className="text-danger mt-0">
+              *Username and Password didn't match
+            </Form.Text>
+          )}
         </div>
-        <Form.Text href="/login">
-          Don't have an account?
-          <Link to="/register"> Sign Up Here</Link>
-        </Form.Text>
       </Form>
     </div>
   );

@@ -8,8 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 export const Register = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
-    LastName: "",
+    username: "",
     email: "",
     phno: "",
     address: "",
@@ -46,7 +45,6 @@ export const Register = (props) => {
         .then((data) => {
           console.log(data.message);
           alert(data.message);
-          navigate("/");
         })
         .catch((err) => {
           console.log(err);
@@ -76,10 +74,10 @@ export const Register = (props) => {
           <Col sm={9}>
             <Form.Control
               type="name"
-              placeholder="First Name"
+              placeholder="Name"
               className="form-control-sm"
-              name="name"
-              value={formData.name}
+              name="username"
+              value={formData.username}
               onChange={handleFormData}
             />
           </Col>
