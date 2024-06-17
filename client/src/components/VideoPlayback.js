@@ -62,8 +62,15 @@ function Video_playback() {
         },
         body: JSON.stringify({ jsonbody }),
       });
-      if (response.ok) {
-        console.log("Successfully sent " + JSON.stringify(jsonbody));
+
+      if (response.ok && response.status === 200) {
+        console.log("Ok, received response is " + response.status);
+        const data = await response.json();
+        // setVideoJson(data);
+        console.log(
+          "saveVideo : Successfully sent " + JSON.stringify(jsonbody)
+        );
+        console.log("saveVideo : received " + JSON.stringify(data));
       }
     } catch (error) {}
   };
@@ -74,17 +81,16 @@ function Video_playback() {
       id: id,
       liked: "True",
     };
-
     if (video_json.liked === "True") {
       jsonbody = {
         id: id,
         liked: "False",
       };
-      setLikeButton("ri-thumb-up-fill");
-      setDisLikeButton("ri-thumb-down-line");
+      setLikeButton("ri-thumb-up-line");
       video_json.liked = "False";
     } else {
-      setLikeButton("ri-thumb-up-line");
+      setLikeButton("ri-thumb-up-fill");
+      setDisLikeButton("ri-thumb-down-line");
       video_json.liked = "True";
     }
 
@@ -98,8 +104,14 @@ function Video_playback() {
         body: JSON.stringify({ jsonbody }),
       });
 
-      if (response.ok) {
-        console.log("Successfully sent " + JSON.stringify(jsonbody));
+      if (response.ok && response.status === 200) {
+        console.log("Ok, received response is " + response.status);
+        const data = await response.json();
+        // setVideoJson(data);
+        console.log(
+          "saveVideo : Successfully sent " + JSON.stringify(jsonbody)
+        );
+        console.log("saveVideo : received " + JSON.stringify(data));
       }
     } catch (error) {}
   };
@@ -133,13 +145,18 @@ function Video_playback() {
         console.log("Ok, received response is " + response.status);
         const data = await response.json();
         setVideoJson(data);
-        console.log("fetchVideo : " + data);
+        console.log("fetchVideo : " + JSON.stringify(data));
         setLoading(false);
         setStatus("Loaded");
-        if (data.saved === "False") {
-          setSaveButton("ri-save-line");
-        } else {
+        if (data.saved === "True") {
           setSaveButton("ri-save-fill");
+        } else {
+          setSaveButton("ri-save-line");
+        }
+        if (data.liked === "True") {
+          setLikeButton("ri-thumb-up-fill");
+        } else {
+          setLikeButton("ri-thumb-up-line");
         }
       } else {
         console.log("Not ok, received response is " + response.status);
@@ -243,7 +260,7 @@ function Video_playback() {
                     style={{ paddingRight: "2px" }}
                     variant={`btn-outline`}
                     size="sm"
-                    className={`${likebutton}  ${theme}`}
+                    className={`${likebutton} ${theme}`}
                     onClick={() => likeVideo(video_json._id)}
                   >
                     Like
@@ -251,7 +268,7 @@ function Video_playback() {
                   <Button
                     variant={`btn-outline`}
                     size="sm"
-                    className={`${dislikebutton}  ${theme}`}
+                    className={`${dislikebutton} ${theme}`}
                     onClick={() => dislikeVideo(video_json._id)}
                   >
                     Dislike
@@ -259,7 +276,7 @@ function Video_playback() {
                   <Button
                     variant={`btn-outline`}
                     size="sm"
-                    className={`${savebutton}  ${theme}`}
+                    className={`${savebutton} ${theme}`}
                     onClick={() => saveVideo(video_json._id)}
                   >
                     Save

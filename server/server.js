@@ -78,15 +78,13 @@ app.put("/save-video", middleware, async (req, res) => {
         return res.status(400).send({ message: "Video not found" });
       }
       oldvideo.saved = saved;
-      const updatedUser = oldvideo.save();
-      console.log("Video_saved is set to " + saved);
-      return res
-        .status(200)
-        .json({ message: "Video_saved is set to " + saved });
+      const updatedVideo = oldvideo.save();
+      console.log("Saved is set to " + saved);
+      return res.status(200).json(updatedVideo);
     }
     return res.status(400).send({ message: "ID not provided" });
   } catch (error) {
-    console.log("save-video: " + error.message);
+    console.log("save-video : " + error.message);
     res.status(400).json({ message: error.message });
   }
 });
@@ -103,21 +101,23 @@ app.put("/like-video", middleware, async (req, res) => {
       liked = req.body.jsonbody.liked;
     }
 
-    console.log("Video id " + id + " liked is " + liked);
+    console.log("like-video: Video id " + id + " liked is " + liked);
     if (id.length > 0) {
       let oldvideo = await videolistDB.findOne({ _id: id });
       if (!oldvideo) {
-        console.log("Video " + id + " not found");
+        console.log("like-video: Video " + id + " not found");
         return res.status(400).send({ message: "Video not found" });
       }
       oldvideo.liked = liked;
-      const updatedUser = oldvideo.save();
-      console.log("liked is set to " + liked);
-      return res.status(200).json({ message: "liked is set to " + liked });
+      const updatedVideo = oldvideo.save();
+      console.log("like-video: liked is set to " + liked);
+      return res.status(200).json(updatedVideo);
+    } else {
+      console.log("like-video: id is not provided");
     }
     return res.status(400).send({ message: "ID not provided" });
   } catch (error) {
-    console.log("liked-video: " + error.message);
+    console.log("like-video: " + error.message);
     res.status(400).json({ message: error.message });
   }
 });
