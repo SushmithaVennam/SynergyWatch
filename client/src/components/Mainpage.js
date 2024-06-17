@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MyNavbar from "./Navbar";
 import SideBar from "./SideBar";
 import Button from "react-bootstrap/Button";
@@ -27,19 +27,6 @@ const Mainpage = (props) => {
   const ToggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-
-  const minWidthText = "(min-width: 768px)";
-  const [narrowmode, setnarrowmode] = useState(
-    window.matchMedia(minWidthText).matches
-  );
-
-  useEffect(() => {
-    window
-      .matchMedia(minWidthText)
-      .addEventListener("change", (e) => setnarrowmode(e.matches));
-  }, []);
-
-  // const video_id = "30b642bd-7591-49f4-ac30-5c538f975b15";
 
   const handleClosePay = () => {
     setshowPay(false);
@@ -127,8 +114,8 @@ const Mainpage = (props) => {
                     filteredVideos.length > 0 ? (
                       filteredVideos.map((video_json, index) => (
                         <div className="col-md-4 my-3" key={index}>
-                          <div className="thumbnail_image" key={video_json.id}>
-                            <Link to={"/videos/" + video_json.id}>
+                          <div className="thumbnail_image" key={video_json._id}>
+                            <Link to={"/videos/" + video_json._id}>
                               <img
                                 src={video_json.thumbnail_url}
                                 alt="Video thumbnail"
@@ -141,7 +128,7 @@ const Mainpage = (props) => {
                             </Link>
                           </div>
                           <div className="home_thumbnail_title">
-                            <h6 className="my-3" href={""}>
+                            <h6 className="my-3" href={video_json.video_url}>
                               {video_json.title}
                             </h6>
                           </div>

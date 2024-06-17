@@ -3,10 +3,9 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const Register = (props) => {
-  const navigate = useNavigate();
+export const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",

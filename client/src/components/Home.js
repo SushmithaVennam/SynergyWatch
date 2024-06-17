@@ -19,7 +19,7 @@ const Home = () => {
     if (loading === "Loading") {
       console.log(`${thisPage} : Page is ${loading}`);
       const resp = fetchVideos();
-      if (resp != 200) {
+      if (resp !== 200) {
         console.log(`${thisPage} : Page is already ${loading}`);
         return;
       }
@@ -33,7 +33,7 @@ const Home = () => {
     } else {
       console.log(`${thisPage} : Page is already ${loading}`);
     }
-  });
+  }, []);
 
   const fetchVideos = async () => {
     if (loading === "Fetching" || loading === "Failed") {

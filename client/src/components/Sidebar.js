@@ -68,8 +68,6 @@ const SideBar = (props) => {
     },
   ];
 
-  // console.log("Sidebar : " + props.props.srcpage);
-
   return (
     <div>
       <section

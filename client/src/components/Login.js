@@ -13,7 +13,7 @@ export const Login = (props) => {
     localStorage.getItem("theme") === "dark" ? "dark" : "light" || "light";
   const logo = theme !== "dark" ? light_theme_logo : black_theme_logo;
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
