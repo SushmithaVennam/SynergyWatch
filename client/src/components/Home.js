@@ -33,7 +33,7 @@ const Home = () => {
     } else {
       console.log(`${thisPage} : Page is already ${loading}`);
     }
-  }, []);
+  }, [videosArray]);
 
   const fetchVideos = async () => {
     if (loading === "Fetching" || loading === "Failed") {
@@ -46,8 +46,7 @@ const Home = () => {
       setLoading("Failed");
       Cookies.remove("jwt_token");
       window.location.href = "/login";
-    }
-    try {
+    } try {
       const response = await fetch(
         `http://localhost:${port}/get-video-details`,
         {

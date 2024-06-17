@@ -91,6 +91,37 @@ app.put("/save-video", middleware, async (req, res) => {
   }
 });
 
+app.put("/like-video", middleware, async (req, res) => {
+  try {
+    let id = "";
+    let liked = "False";
+    if (req.body.hasOwnProperty("id")) {
+      id = req.body.id;
+      liked = req.body.liked;
+    } else if (req.body.jsonbody.hasOwnProperty("id")) {
+      id = req.body.jsonbody.id;
+      liked = req.body.jsonbody.liked;
+    }
+
+    console.log("Video id " + id + " liked is " + liked);
+    if (id.length > 0) {
+      let oldvideo = await videolistDB.findOne({ _id: id });
+      if (!oldvideo) {
+        console.log("Video " + id + " not found");
+        return res.status(400).send({ message: "Video not found" });
+      }
+      oldvideo.liked = liked;
+      const updatedUser = oldvideo.save();
+      console.log("liked is set to " + liked);
+      return res.status(200).json({ message: "liked is set to " + liked });
+    }
+    return res.status(400).send({ message: "ID not provided" });
+  } catch (error) {
+    console.log("liked-video: " + error.message);
+    res.status(400).json({ message: error.message });
+  }
+});
+
 app.get("/get-video-details", middleware, async (req, res) => {
   try {
     const Videos = await videolistDB.find();
