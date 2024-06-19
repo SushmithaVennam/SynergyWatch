@@ -13,6 +13,12 @@
     color : red
 }
 
+.roundShadow {
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+}
+
 .socialmedia_icon{
     width:25px;
     margin-right: 4px;
