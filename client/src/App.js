@@ -22,8 +22,8 @@ function App() {
 
         <Route exact path="/trending" element={<Trending />} />
         <Route exact path="/gaming" element={<Gaming />} />
-        <Route exact path="/saved" element={<Saved />} />
-        <Route exact path="/liked" element={<Liked />} />
+        <Route exact path="/saved-videos" element={<Saved />} />
+        <Route exact path="/liked-videos" element={<Liked />} />
         <Route exact path="/notfound" element={<PageNotFound />} />
         <Route path="*" element={<Navigate to="/notfound" replace />} />
       </Routes>

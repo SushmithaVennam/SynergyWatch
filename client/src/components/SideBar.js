@@ -40,13 +40,13 @@ const SideBar = (props) => {
       current: props.props.srcpage === "Gaming",
     },
     {
-      ref: "/saved",
+      ref: "/saved-videos",
       icon: <FaSave />,
       key: "Saved videos",
       current: props.props.srcpage === "Saved",
     },
     {
-      ref: "/liked",
+      ref: "/liked-videos",
       icon: <FaHeart />,
       key: "Liked videos",
       current: props.props.src === "Liked",
