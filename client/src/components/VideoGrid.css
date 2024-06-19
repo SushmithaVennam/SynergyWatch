@@ -3,6 +3,11 @@
     background-color:cadetblue;
 }
 
+.thumbnail_image {
+    width: 200px;
+    max-width: 300px;
+    max-height: 200px;
+}
 .channel_description p {
     margin-bottom: 0;
     font-size: 11px;
@@ -12,3 +17,4 @@
     width: 50;
     height: 50px;
 }
+

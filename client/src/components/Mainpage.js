@@ -72,7 +72,11 @@ const Mainpage = (props) => {
           Theme: theme,
         }}
       />
-      <div className="d-flex flex-row container-fluid">
+      <div
+        className={`${
+          props.props.videos.length === 0 ? "vh-100" : ""
+        } d-flex flex-row container-fluid`}
+      >
         <div className="col-md-3 ">
           <SideBar props={{ srcpage: props.props.src }} />
         </div>
