@@ -117,10 +117,10 @@ const Home = () => {
         return response.status;
       } else {
         setLoading(response.message);
+        setshowFailure(true);
         console.log(
           `${thisPage} : Error while fetching videos. ${response.error}`
         );
-        showFailure(true);
         if (response.status === 403 || response.status === 401) {
           Cookies.remove("jwt_token");
           window.location.href = "/login";
@@ -144,11 +144,7 @@ const Home = () => {
           Theme: theme,
         }}
       />
-      <div
-        className={`${
-          videosArray.length === 0 ? "vh-100" : ""
-        } d-flex flex-row container-fluid`}
-      >
+      <div className="d-flex flex-row container-fluid">
         <div className="col-md-3 ">
           <SideBar props={{ srcpage: "Home" }} />
         </div>
@@ -187,7 +183,6 @@ const Home = () => {
             />
             <Button
               variant={`outline-${notTheme}`}
-              // variant={`outline-secondary`}
               size="sm"
               className="input-group-append ri-search-line"
             ></Button>
@@ -196,7 +191,7 @@ const Home = () => {
             <section className="thumbnails_layout">
               <div className="container">
                 <div className="row">
-                  {showFailure > 0 ? (
+                  {showFailure && (
                     <div className="d-flex flex-column align-items-center">
                       <img
                         src={notconnected}
@@ -210,7 +205,8 @@ const Home = () => {
                       <p>Please try again.</p>
                       <Button>Retry</Button>
                     </div>
-                  ) : showSearchEmpty ? (
+                  )}
+                  {showSearchEmpty && (
                     <div className="d-flex flex-column align-items-center">
                       <img
                         src={searchEmpty}
@@ -221,10 +217,12 @@ const Home = () => {
                       <p>Try different key words or remove search filter</p>
                       <Button>Retry</Button>
                     </div>
-                  ) : (
+                  )}
+                  {!showFailure &&
+                    !showSearchEmpty &&
                     filteredVideos.map((video_json, index) => (
                       <div className="col-md-4 my-3" key={index}>
-                        <div className="thumbnail_image" key={video_json._id}>
+                        <div key={video_json._id}>
                           <Link to={"/videos/" + video_json._id}>
                             <img
                               src={video_json.thumbnail_url}
@@ -262,8 +260,7 @@ const Home = () => {
                           </div>
                         )}
                       </div>
-                    ))
-                  )}
+                    ))}
                 </div>
               </div>
             </section>
