@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import MyNavbar from "./Navbar";
-import Sidebar from "./SideBar";
-import Button from "react-bootstrap/Button";
+import SideBar from "./SideBar";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import logo_dark from "../resources/PFXWatchBlack.png";
 import "./VideoGrid.css";
 import "./Mainpage.css";
 
-const PageNotFound = (props) => {
-  const [showPay, setshowPay] = useState(true);
+const PageNotFound = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const failureImage =
     "https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png";
@@ -18,48 +19,34 @@ const PageNotFound = (props) => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
-  const handleClosePay = () => {
-    setshowPay(false);
-  };
-
   return (
     <div className={theme}>
-      <section className="nav_bar_component">
-        <MyNavbar
-          props={{
-            toggleTheme: ToggleTheme,
-            Theme: theme,
-          }}
-        />
-      </section>
-      <section className={`container-fluid`}>
-        <div className="row">
-          <div className="col-md-3">
-            <Sidebar props={{ srcpage: "notFound" }} />
-          </div>
-          <div className={`col-md-9 container`}>
-            <div className="thumbnail_container">
-              <section className="thumbnails_layout">
-                <div className="container">
-                  <div className="row">
-                    <div className="d-flex flex-column align-items-center">
-                      <img
-                        src={failureImage}
-                        alt="page not found"
-                        style={{ width: "500px", height: "400px" }}
-                      />
-                      <h1>Page Not Found</h1>
-                      <p>
-                        We are sorry, the page you requested could not be found.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
+      <MyNavbar
+        props={{
+          toggleTheme: ToggleTheme,
+          Theme: theme,
+        }}
+      />
+      <div className="d-flex flex-row container-fluid">
+        <div className="col-md-3 ">
+          <SideBar props={{ srcpage: "notFound" }} />
         </div>
-      </section>
+        <Container>
+          <Row className="vh-100 justify-content-md-center">
+            <Col display="flex" alignItems="center">
+              <div className="d-flex flex-column align-items-md-center">
+                <img
+                  src={failureImage}
+                  alt="page not found"
+                  style={{ width: "500px", height: "400px" }}
+                />
+                <h1>Page Not Found</h1>
+                <p>We are sorry, the page you requested could not be found.</p>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 };
