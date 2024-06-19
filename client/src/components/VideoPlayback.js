@@ -109,9 +109,9 @@ function Video_playback() {
         const data = await response.json();
         // setVideoJson(data);
         console.log(
-          "saveVideo : Successfully sent " + JSON.stringify(jsonbody)
+          "likeVideo : Successfully sent " + JSON.stringify(jsonbody)
         );
-        console.log("saveVideo : received " + JSON.stringify(data));
+        console.log("likeVideo : received " + JSON.stringify(data));
       }
     } catch (error) {}
   };
@@ -119,9 +119,37 @@ function Video_playback() {
   const dislikeVideo = async (id) => {
     if (dislikebutton === "ri-thumb-down-line") {
       setDisLikeButton("ri-thumb-down-fill");
-      setLikeButton("ri-thumb-up-line");
+      if (video_json.liked === "True") setLikeButton("ri-thumb-up-line");
     } else {
       setDisLikeButton("ri-thumb-down-line");
+    }
+    if (video_json.liked === "True") {
+      const uri = `http://localhost:${port}/like-video`;
+      var jsonbody = {
+        id: id,
+        liked: "False",
+      };
+      try {
+        const response = await fetch(uri, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: jwtToken,
+          },
+          body: JSON.stringify({ jsonbody }),
+        });
+
+        if (response.ok && response.status === 200) {
+          console.log("Ok, received response is " + response.status);
+          const data = await response.json();
+          // setVideoJson(data);
+          console.log(
+            "dislikeVideo : Successfully sent " + JSON.stringify(jsonbody)
+          );
+          console.log("dislikeVideo : received " + JSON.stringify(data));
+          video_json.liked = "False";
+        }
+      } catch (error) {}
     }
   };
 
