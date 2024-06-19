@@ -74,10 +74,10 @@ const SideBar = (props) => {
         className={`min-vh-100 d-flex flex-column justify-content-between sticky-top`}
         style={{ position: "fixed", marginTop: "50px" }}
       >
-        <Container className="w-100">
+        <Container className="w-100 mt-5">
           {list.map((obj) => (
             <Nav.Link href={obj.ref} key={obj.key}>
-              <Row>
+              <Row className="p-1">
                 <Col xs={1} className={`${obj.current ? "active_icon" : ""}`}>
                   {obj.icon}
                 </Col>
