@@ -43,13 +43,13 @@ const SideBar = (props) => {
       ref: "/saved-videos",
       icon: <FaSave />,
       key: "Saved videos",
-      current: props.props.srcpage === "Saved",
+      current: props.props.srcpage === "Saved Videos",
     },
     {
       ref: "/liked-videos",
       icon: <FaHeart />,
       key: "Liked videos",
-      current: props.props.src === "Liked",
+      current: props.props.src === "Liked Videos",
     },
   ];
 
