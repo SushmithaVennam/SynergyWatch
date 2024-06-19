@@ -21,7 +21,20 @@ const Mainpage = (props) => {
       : "https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png";
   const searchEmpty =
     "https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png";
+  const SavedEmpty =
+    "https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png";
 
+  var failureImage = notconnected;
+  var failure_alt = "Not connected to network";
+  var failure_h3 = "Oops! Something Went Wrong";
+  var failure_p = "We are having some trouble to complete your request.";
+
+  if (props.props.src === "Saved") {
+    failureImage = SavedEmpty;
+    failure_alt = "no saved videos";
+    failure_h3 = "No saved videos found";
+    failure_p = "You can save your videos while watching them";
+  }
   localStorage.setItem("theme", theme);
 
   const ToggleTheme = () => {
@@ -168,16 +181,20 @@ const Mainpage = (props) => {
                   ) : (
                     <div className="d-flex flex-column align-items-center">
                       <img
-                        src={notconnected}
-                        alt="Not connected to network"
+                        src={failureImage}
+                        alt={failure_alt}
                         style={{ width: "500px", height: "400px" }}
                       />
-                      <h3>Oops! Something Went Wrong</h3>
-                      <p>
-                        We are having some trouble to complete your request.
-                      </p>
-                      <p>Please try again.</p>
-                      <Button>Retry</Button>
+                      <h3>{failure_h3}</h3>
+                      <p> {failure_p}</p>
+                      {props.props.src !== "Saved" ? (
+                        <div>
+                          <p>Please try again.</p>
+                          <Button>Retry</Button>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
                     </div>
                   )}
                 </div>
