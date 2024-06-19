@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Image } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import black_theme_logo from "../resources/PFXWatchWhite.png";
 import light_theme_logo from "../resources/PFXWatchBlack.png";
@@ -9,6 +10,8 @@ import light_theme_logo from "../resources/PFXWatchBlack.png";
 export const Login = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showWrongPassword, setShowWrongPassword] = useState(false);
+  const [showNoUser, setNoUser] = useState(false);
+
   const theme =
     localStorage.getItem("theme") === "dark" ? "dark" : "light" || "light";
   const logo = theme !== "dark" ? light_theme_logo : black_theme_logo;
@@ -56,6 +59,9 @@ export const Login = (props) => {
       } else if (response.status === 401) {
         setShowWrongPassword(true);
         console.log(data.message + " Please enter valid username and password");
+      } else if (response.status === 406) {
+        setNoUser(true);
+        console.log(data.message + " User doesn't exists. Please register");
       }
     } catch (error) {
       console.log("Failed to " + error.message);
@@ -117,6 +123,12 @@ export const Login = (props) => {
           {showWrongPassword && (
             <Form.Text as="small" className="text-danger mt-0">
               *Username and Password didn't match
+            </Form.Text>
+          )}
+          {showNoUser && (
+            <Form.Text as="small" className="text-danger mt-0">
+              User doesn't exists.
+              <Link to="/register"> Register Here</Link>
             </Form.Text>
           )}
         </div>

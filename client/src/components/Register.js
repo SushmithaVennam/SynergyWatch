@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { Container, Image } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
+import black_theme_logo from "../resources/PFXWatchWhite.png";
+import light_theme_logo from "../resources/PFXWatchBlack.png";
 
 export const Register = () => {
+  const theme =
+    localStorage.getItem("theme") === "dark" ? "dark" : "light" || "light";
+  const logo = theme !== "dark" ? light_theme_logo : black_theme_logo;
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -54,26 +60,29 @@ export const Register = () => {
   };
   return (
     <div
-      className="d-flex justify-content-center align-items-center"
+      className={`d-flex justify-content-center align-items-center ${theme}`}
       style={{ position: "relative", height: "100vh" }}
     >
       <Form
         onSubmit={submitForm}
-        className="rounded-4 border"
-        style={{ padding: "20px" }}
+        className="rounded-2 border"
+        style={{ padding: "20px", width: "400px" }}
       >
+        <Container className="text-center">
+          <Image src={logo} width={"125px"} alt="logo" />
+        </Container>
         <Form.Group
           as={Row}
           className="mb-3 mt-3 form-control-sm"
           controlId="formHoizontalFirstName"
         >
           <Form.Label column sm={3}>
-            Name
+            USERNAME
           </Form.Label>
           <Col sm={9}>
             <Form.Control
               type="name"
-              placeholder="Name"
+              placeholder="Username"
               className="form-control-sm"
               name="username"
               value={formData.username}
@@ -217,7 +226,7 @@ export const Register = () => {
         </div>
         <Form.Text href="/">
           Already have an account?
-          <Link to="/"> Sign In Here</Link>
+          <Link to="/"> LogIn Here</Link>
         </Form.Text>
       </Form>
     </div>
