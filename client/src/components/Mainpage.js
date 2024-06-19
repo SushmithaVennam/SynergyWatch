@@ -10,7 +10,7 @@ import "./VideoGrid.css";
 import "./Mainpage.css";
 
 const Mainpage = (props) => {
-  const [showPay, setshowPay] = useState(true);
+  const [showPay, setshowPay] = useState(props.props.src === "Home");
   const [searchString, setSearchString] = useState("");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const notTheme = theme === "light" ? "dark" : "light";
