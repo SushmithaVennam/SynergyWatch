@@ -9,10 +9,8 @@ import "./Mainpage.css";
 const PageNotFound = (props) => {
   const [showPay, setshowPay] = useState(true);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const notconnected =
-    theme === "light"
-      ? "https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-      : "https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png";
+  const failureImage =
+    "https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png";
 
   localStorage.setItem("theme", theme);
 
@@ -40,46 +38,20 @@ const PageNotFound = (props) => {
             <Sidebar props={{ srcpage: "notFound" }} />
           </div>
           <div className={`col-md-9 container`}>
-            {showPay && (
-              <section className="Banner">
-                <div>
-                  <div className="d-flex w-100 justify-content-between">
-                    <img
-                      alt="logo"
-                      src={logo_dark}
-                      width="100px"
-                      height="25px"
-                    ></img>
-                    <Button
-                      onClick={handleClosePay}
-                      variant={`light`}
-                      size="sm"
-                    >
-                      X
-                    </Button>
-                  </div>
-                  <p className="normalText ps-1">
-                    Buy PFX watch Premium prepaid plans with UPI
-                  </p>
-                  <Button variant={`outline-dark`} size="sm" className="ms-1">
-                    GET IT NOW
-                  </Button>
-                </div>
-              </section>
-            )}
-
             <div className="thumbnail_container">
               <section className="thumbnails_layout">
                 <div className="container">
                   <div className="row">
                     <div className="d-flex flex-column align-items-center">
                       <img
-                        src={notconnected}
-                        alt="Page not found"
+                        src={failureImage}
+                        alt="page not found"
                         style={{ width: "500px", height: "400px" }}
                       />
-                      <h3> The Page you are looking for does not exist</h3>
-                      <Button>Go Home</Button>
+                      <h1>Page Not Found</h1>
+                      <p>
+                        We are sorry, the page you requested could not be found.
+                      </p>
                     </div>
                   </div>
                 </div>
